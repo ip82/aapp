@@ -1,10 +1,21 @@
 %div{"ng-repeat" => "category in categories"}
   %a.add-product{"data-target" => "#addProductModal", "data-toggle" => "modal", "href" => "#add-product", "data-category-id" => "{{category.id}}" }
     {{category.name}}
-  %ul.list{"ng-model" => "category.products", "ui-sortable" => "sortableOptions"}
-    %li.item{"ng-repeat" => "product in category.products track by product.index"}
-      {{product.name}}
-      {{$index}}
+  %table.table
+    %thead
+      %tr
+        %th product
+        %th description
+        %th price, €
+    %tbody.list{"ng-model" => "category.products", "ui-sortable" => "sortableOptions"}
+      %tr.item{"ng-repeat" => "product in category.products track by product.index"}
+        %td
+          {{product.name}}
+        %td
+          {{product.description}}
+        %td
+          {{product.price_cents/100}}
+
 
 #addProductModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog

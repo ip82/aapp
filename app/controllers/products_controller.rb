@@ -2,7 +2,16 @@ class ProductsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def create
-    Product.create(name: params['name'], price: params['price'], category_id: params['cid'].to_i, index: Product.maximum(:index) + 1)
+    @category = Category.find(params['cid'].to_i)
+    product_index = (@category.products.any?)? @category.products.maximum(:index) + 1 : 0
+
+    Product.create do |p|
+      p.name = params['name']
+      p.price = params['price']
+      p.category_id= @category.id
+      p.index = product_index
+      p.description = params['description']
+    end
     render nothing: true, status: 200
   end
 
