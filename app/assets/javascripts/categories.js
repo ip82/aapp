@@ -6,9 +6,11 @@ myapp.controller('AAppController', function ($scope, $http) {
 
     $scope.sortableOptions = {
         stop: function(e, ui) {
-                for (var index in $scope.categories[0].products) {
-                    $scope.categories[0].products[index].index = index;
-                    $http.put('/products/' + $scope.categories[0].products[index].id, {index: index}).
+            var products = [];
+            products = products.concat.apply(products, _.map($scope.categories, function(c){return c.products}));
+                for (var index in products) {
+                    products[index].index = index;
+                    $http.put('/products/' + products[index].id, {index: index}).
                         success(function(data, status, headers, config) {
                             console.info('product updated');
                         });

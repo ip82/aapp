@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require underscore-min
 //= require jquery-ui.min
 //= require angular.min
 //= require sortable
