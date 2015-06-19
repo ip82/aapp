@@ -22,7 +22,6 @@ myapp.controller('AAppController', function ($scope, $http) {
         console.info('111');
         $http.post('/products/', {name: productName, description: productDescription, price: productPrice, cid: categoryId}).
             success(function(data, status, headers, config) {
-                $("#productName, #productDescription, #productPrice").val("");
                 getData();
             });
     }
